@@ -25,7 +25,7 @@ public class GitChart extends Application{
 		File f = new File("index.html");
 		engine.load(f.toURI().toString());
 		root.getChildren().add(view);
-		Scene scene = new Scene(root, 680, 120);
+		Scene scene = new Scene(root, 680, 130);
 		stage.setScene(scene);
 		stage.setResizable(false);
 		stage.show();
