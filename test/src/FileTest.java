@@ -6,18 +6,31 @@ import  java.nio.file.Paths;
 import java.util.List;
 
 public class FileTest{
-	public static void main(String[]args){
+	public static void writeFile(String fname,String txt){
 		try{
-			FileOutputStream writer = new FileOutputStream("test");
-			
-			writer.write("helloworld".getBytes());
+			FileOutputStream writer = new FileOutputStream(fname);
+				
+			writer.write(txt.getBytes());
 			writer.close();
-
-			List<String> text = Files.readAllLines(Paths.get("test"));
-			
-			for(String line : text){
-				System.out.println(line);
-			}
 		}catch(Exception e){}
+	
+	}
+
+	public static List<String> readFile(String fname){
+		List<String> text = null;
+		
+		try{
+			text = Files.readAllLines(Paths.get(fname));
+		}catch(Exception e){}
+
+		return text;
+	}
+
+	public static void main(String[]args){	
+		writeFile("test","helloworld");
+		
+		for(String line : readFile("test")){
+			System.out.println(line);
+		}	
 	}
 }
