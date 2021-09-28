@@ -19,7 +19,7 @@ public class FileTest{
 	
 	}
 
-	public static List<String> readFile(String fname){
+	public static List<String> getLines(String fname){
 		List<String> text = null;
 		
 		try{
@@ -27,6 +27,23 @@ public class FileTest{
 		}catch(Exception e){}
 
 		return text;
+	}
+
+	public static String readFile(String fname){
+		boolean flag = false;
+		String tmp = "";
+		
+		for(String line : getLines(fname)){
+			if(flag){
+				tmp+="\n";
+			}else{
+				flag = true;
+			}
+
+			tmp+=line;
+		}
+
+		return tmp;
 	}
 
 	public static List<String> dir(String path){
@@ -45,11 +62,9 @@ public class FileTest{
 	public static void main(String[]args){	
 		writeFile("test","helloworld");
 		
-		System.out.println("--------------");
+		System.out.println("--------------");	
 
-		for(String line : readFile("test")){
-			System.out.println(line);
-		}
+		System.out.println(readFile("test"));
 		
 		System.out.println("--------------");	
 		
