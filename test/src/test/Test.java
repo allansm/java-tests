@@ -4,6 +4,11 @@ import  java.lang.Runtime;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import  java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.File;
+import  java.io.OutputStream;
+import  java.net.URL;
 
 public class Test{
 	public static List<String> exec(String command){
@@ -19,9 +24,38 @@ public class Test{
 		return lines;
 	}
 
+	public static boolean download(String link,String filepath) {
+		try {
+			BufferedInputStream inputStream = new BufferedInputStream(new URL(link).openStream());
+			
+			if(!new File(filepath).exists()) {
+				FileOutputStream fileOS = new FileOutputStream(filepath); 
+			    	byte data[] = new byte[1024];
+			    	int byteContent;
+			    	
+			    	while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
+			        	fileOS.write(data, 0, byteContent);
+			    	}
+			    
+			    	fileOS.close();
+			    	System.gc();
+
+				return true;
+
+			}else {
+				return false;	
+			}
+		}catch(Exception e){ 
+			e.printStackTrace();
+			
+			return false;
+		}
+	}
+
 	public static void main(String[]args){
-		for(String n : exec("a.bat")){
+		for(String n : exec("tasklist")){
 			System.out.println(n);
 		}
+		download("https://github.com/allansm?tab=repositories","test.txt");	
 	}
 }
