@@ -52,10 +52,34 @@ public class Test{
 		}
 	}
 
+	public static String getContent(String link) {
+		try {
+			BufferedInputStream inputStream = new BufferedInputStream(new URL(link).openStream());
+		
+			byte data[] = new byte[1024];
+			int byteContent;
+			String tmp = "";	
+			while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
+				tmp+=new String(data);
+			}
+		    
+			System.gc();
+
+			return tmp;	
+		}catch(Exception e){ 
+			e.printStackTrace();
+			
+			return "";
+		}
+	}
+
 	public static void main(String[]args){
 		for(String n : exec("tasklist")){
 			System.out.println(n);
+		
 		}
-		download("https://github.com/allansm?tab=repositories","test.txt");	
+		String txt = getContent("https://www.w3.org/TR/PNG/iso_8859-1.txt");
+
+		System.out.println(txt);
 	}
 }
