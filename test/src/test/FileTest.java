@@ -59,6 +59,18 @@ public class FileTest{
 		return cp.toAbsolutePath().toString();	
 	}
 
+	public static boolean isFile(String path){
+		return new File(path).isFile();
+	}
+
+	public static boolean isDir(String path){
+		return new File(path).isDirectory();
+	}
+
+	public static boolean exists(String path){
+		return new File(path).exists();
+	}
+
 	public static void main(String[]args){	
 		writeFile("test","helloworld");
 		
@@ -71,9 +83,12 @@ public class FileTest{
 		for(String fn : dir(".")){
 			System.out.println(fn);
 		}
-
+		System.out.println("--------------");
+		System.out.println("test isfile:"+isFile("test"));
+		System.out.println("test isdir:"+isDir("test"));
+		System.out.println("test exists:"+exists("test"));
 		remove("test");
-		
+		System.out.println("test exists:"+exists("test"));	
 		System.out.println("--------------");
 		
 		for(String fn : dir(".")){
