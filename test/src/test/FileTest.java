@@ -71,6 +71,10 @@ public class FileTest{
 		return new File(path).exists();
 	}
 
+	public static String getTemp(){
+		return System.getProperty("java.io.tmpdir");
+	}
+
 	public static void main(String[]args){	
 		writeFile("test","helloworld");
 		
@@ -97,5 +101,6 @@ public class FileTest{
 
 		System.out.println("");
 		System.out.println("current dir:"+getcwd());
+		System.out.println("temp:"+getTemp());
 	}
 }
