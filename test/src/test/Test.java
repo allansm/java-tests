@@ -9,6 +9,11 @@ import java.io.FileOutputStream;
 import java.io.File;
 import  java.io.OutputStream;
 import  java.net.URL;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.awt.Robot;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 
 public class Test{
 	public static List<String> exec(String command){
@@ -73,6 +78,19 @@ public class Test{
 		}
 	}
 
+	public static BufferedImage screenshot() throws Exception{
+		Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+		BufferedImage capture = new Robot().createScreenCapture(screenRect);
+		
+		return capture;	
+	}
+
+	public static void saveImage(String name,String extension,BufferedImage capture) throws Exception{
+		File imageFile = new File(name+"."+extension);
+		ImageIO.write(capture, extension, imageFile );
+		System.out.println(name+"."+extension);	
+	}
+
 	public static void main(String[]args){
 		for(String n : exec("tasklist")){
 			System.out.println(n);
@@ -81,5 +99,8 @@ public class Test{
 		String txt = getContent("https://www.w3.org/TR/PNG/iso_8859-1.txt");
 
 		System.out.println(txt);
+		try{
+			saveImage("ss","bmp",screenshot());
+		}catch(Exception e){}
 	}
 }
