@@ -1,4 +1,10 @@
 {
 	"txt":"helloworld",
-	"n":2
+	"n":2,
+	"arr":[1,2,3,4],
+	"object":{
+		"msg":"hello",
+		"msg2":"world",
+		"arr":[4,3,2,1]
+	}
 }
