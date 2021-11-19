@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import java.awt.Robot;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.util.Collections;
 
 public class Test{
 	public static List<String> exec(String command){
@@ -91,6 +92,13 @@ public class Test{
 		System.out.println(name+"."+extension);	
 	}
 
+	public static void shuffleTest(List<Integer> list){
+		Collections.shuffle(list);
+		for(int n : list){
+			System.out.println(n);	
+		}
+	}
+
 	public static void main(String[]args){
 		for(String n : exec("tasklist")){
 			System.out.println(n);
@@ -102,5 +110,11 @@ public class Test{
 		try{
 			saveImage("ss","bmp",screenshot());
 		}catch(Exception e){}
+
+		List<Integer> list = new ArrayList<>();
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		shuffleTest(list);
 	}
 }
