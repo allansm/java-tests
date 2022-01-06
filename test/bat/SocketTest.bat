@@ -1,3 +1,3 @@
 @echo off 
 cd .. 
-java -classpath "src;bin;lib;lib\json-20210307.jar;..\..\java-lib\bin" test.SocketTest 
+java -classpath "src;bin;lib;lib/json-20210307.jar;..\..\java-lib\bin" test.SocketTest 

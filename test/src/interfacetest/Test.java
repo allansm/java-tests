@@ -1,5 +1,5 @@
 package interfacetest;
 
 public interface Test{
-	    void action();
+	    void action(String txt);
 }
