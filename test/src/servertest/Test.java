@@ -11,6 +11,8 @@ public class Test{
 		while(true){
 			sock.server(8080,(s)->{
 				sock.send(sock.httpHeader());
+				
+				sock.send("<style> *{ padding:0px;margin:0px } </style>");
 
 				sock.send("<img id='ss' src='' style='display:block;margin:auto' width='100%' height='100%'>");
 				
