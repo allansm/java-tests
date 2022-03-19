@@ -3,6 +3,8 @@ import allansm.socket.SocketHandle;
 
 public class KeyboardServer{
 	public static int port = 12345;
+	public static SocketHandle socket;
+	public static Robot bot;
 
 	public static void getArgs(String[]args){
 		for(int i=0;i<args.length;i++){
@@ -15,25 +17,35 @@ public class KeyboardServer{
 	public static void main(String[]args){
 		getArgs(args);
 
-		SocketHandle socket = new SocketHandle();
+		socket = new SocketHandle();
 		
 		while(true){
 			System.out.println("started on port :"+port);
 
 			socket.server(port, (connection)->{
 				try{
-					Robot bot = new Robot();
+					bot = new Robot();
 									
 					while(true){
-						String recv = socket.receive(2);
+						for(int i =0;i<10;i++){
+							new Thread(new Runnable(){
+								public void run(){
+									String recv = socket.receive(2);
 
-						if(recv.charAt(0) == 'H'){
-							bot.keyPress(recv.charAt(1));
-						}else{
-							bot.keyRelease(recv.charAt(1));
+									if(recv.charAt(0) == 'H'){
+										bot.keyPress(recv.charAt(1));
+									}else{
+										bot.keyRelease(recv.charAt(1));
+									}
+
+									System.out.print(recv+" ");
+								}
+							}).start();
 						}
-
-						System.out.print(recv+" ");
+						
+						while(Thread.activeCount() > 1){
+							socket.sleep(33);
+						}
 					}
 				}catch(Exception e){}
 			});
